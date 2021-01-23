@@ -1,0 +1,21 @@
+<html>
+
+<body>
+<h1>更新内容:</h1>
+
+<p>检测到最近一次更新：</p>
+
+<ul>
+{% for poc in pocs %}
+</br>
+    <li>
+        poc名称： {{ poc.get("name") }}</br>
+        poc位置： {{ poc.get("html_url") }}
+    </li>
+</br>
+{% endfor %}
+</ul> 
+
+
+</body>
+</html>
