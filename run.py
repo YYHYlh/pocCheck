@@ -13,9 +13,7 @@ import sys
 import smtplib
 import traceback
 requests.packages.urllib3.disable_warnings()
-path = '{}/templates/'.format(os.path.dirname(__file__))
-loader = FileSystemLoader(path)
-env = Environment(loader=loader)
+
 
 
 class JOBRUN:
@@ -30,7 +28,10 @@ class JOBRUN:
             self.commitHistory = ""
 
     def sendEmail(self, pocs):
-        template = env.get_template('tpl.html')
+        path = '{}/templates/'.format(os.path.dirname(os.path.abspath(__file__)))
+        loader = FileSystemLoader(path)
+        env = Environment(loader=loader)
+        template = env.get_template("tpl.html")
         data = template.render(pocs=pocs)
         message = MIMEText(str(data), 'HTML', 'utf-8')
         message['From'] = formataddr(["pocCheck", config.SMTP_SENDER])
